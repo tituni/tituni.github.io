@@ -1,0 +1,7 @@
+## Tituni materials for learning SW dev
+
+These pages contain some instructions and tutorials to be used as support material in various courses. Also, it serves a notebook for myself.
+
+### DevOps
+
+- [How to install a GitLab runner](devops/gitlabrunners.md)
