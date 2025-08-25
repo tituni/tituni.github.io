@@ -52,7 +52,7 @@ Selfhosted Gitlab might not have a build-in package registry configured, so addi
     ```cmd
     docker compose up -d
     ```
-12. Admin credentials are: user: Harbor12345, password: root123 (will be changed after initial login)
+12. Admin credentials are: user: admin, password: Harbor12345 (will be changed after initial login)
 
 ---
 ## If it still doesn't work...
