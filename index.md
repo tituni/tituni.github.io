@@ -5,3 +5,4 @@ These pages contain some instructions and tutorials to be used as support materi
 ### DevOps
 
 - [How to install a GitLab runner](devops/gitlabrunners.md)
+- [How to install a Harbor package registry](devops/harbor_package_registry.md)
