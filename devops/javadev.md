@@ -19,7 +19,7 @@ These instructions are tested using Visual Studio Code in Windows.
 3. Install Gradle [see](https://docs.gradle.org/current/userguide/installation.html)
 
     ```cmd
-    sdk install gradle
+    $ sdk install gradle
     ```
 
 4. Create a Java-application project template with gradle [see](https://docs.gradle.org/current/userguide/part1_gradle_init.html):
@@ -29,8 +29,22 @@ These instructions are tested using Visual Studio Code in Windows.
     ```
 
     This is what you get:
+
      ![gradle templates](./img/templatefiles.png)
 
+5. Build your application (will install all [dependencies](https://docs.gradle.org/current/userguide/part3_gradle_dep_man.html#part3_begin))
 
+    ```cmd
+    $ ./gradlew build
+    ```
 
+6. Run your application
 
+    ```cmd
+    $ ./gradlew run
+    ```
+
+---
+## Simple HTTP servers
+
+- [https://zetcode.com/java/undertow/](https://zetcode.com/java/undertow/)
