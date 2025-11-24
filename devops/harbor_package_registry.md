@@ -70,3 +70,48 @@ Selfhosted Gitlab might not have a build-in package registry configured, so addi
     sudo docker compose down
     sudo docker compose up -d
     ```
+
+## Updating certificates
+
+Let's encrypt certificates expire in 90 days, so renew them before that
+
+1. Stop Harbor
+
+    ```cmd
+    sudo docker compose down
+    ```
+
+2. run certbot
+
+    ```cmd
+    sudo certbot certonly --standalone
+    ```
+
+3. Copy the files in these locations:
+
+    ```cmd
+    sudo cp /etc/letsencrypt/live/your.domain.com/privkey.pem /data/cert/your.domain.key
+    sudo cp /etc/letsencrypt/live/your.domain.com/fullchain.pem /data/cert/your.domain.crt
+
+    sudo cp /data/cert/your.domain.key /etc/docker/certs.d/yourdomain.com/your.domain.key
+    sudo cp /data/cert/your.domain.crt /etc/docker/certs.d/yourdomain.com/your.domain.cert
+
+    sudo cp /data/cert/your.domain.key /data/secret/cert/server.key
+    sudo cp /data/cert/your.domain.crt /data/secret/cert/server.crt
+    ```
+
+4. restart Harbor
+
+    ```cmd
+    sudo docker compose up -d
+    ```
+
+## If still no certificate
+
+Check the path where the nginx-container looks for them (read docker-compose.yml) and check 
+if the certificates are in the right place:
+
+    ```cmd
+     sudo docker exec -it <containerid> sh
+    ```
+
