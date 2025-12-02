@@ -51,12 +51,12 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
     ```cmd
     sudo mkfs -t ext4 /dev/vdb1
     ```
-    
+
 10. Add the new disk to the configuration file
 
-    ````cmd
+    ```cmd
     sudo nano /etc/fstab
-    ´´´
+    ```
 
     Write a new line (you can use other location than /data):
     ```cmd
