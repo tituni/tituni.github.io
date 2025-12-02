@@ -34,7 +34,7 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
 7. Check that the new disk is visible (/dev/vdb) and doesn't have partitioning
 
     ```cmd
-    lsbsk
+    lsblk
     ```
 
      ![csc lsbsk](./img/csc_lsblk.png)
@@ -72,7 +72,7 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
 12. Check that the new volume is visible (/dev/vdb/vdb1) and mounted to /data
 
     ```cmd
-    lsbsk
+    lsblk
     ```
 
      ![csc lsbsk](./img/csc_lsblk_2.png)
