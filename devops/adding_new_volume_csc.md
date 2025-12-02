@@ -31,7 +31,7 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
      df -h
     ```
 
-7. Check that the new volume is visible (/dev/vdb) and doesn't have partitioning
+7. Check that the new disk is visible (/dev/vdb) and doesn't have partitioning
 
     ```cmd
     lsbsk
@@ -69,7 +69,7 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
      sudo mount -a
     ```
 
-12. Check that the new volume is visible (/dev/vdb) and has partitioning
+12. Check that the new volume is visible (/dev/vdb/vdb1) and mounted to /data
 
     ```cmd
     lsbsk
@@ -80,10 +80,19 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
 13. Copy all data to the new disk (might take long)
 
     ```cmd
-    sudo cp -r /data_old /data
+    sudo cp -a /data_old/* /data
     ```
 
-14. Set the owner and access rights for the files
+14. Restart docker (docker-compose up -d)
+
+    ```cmd
+    sudo docker compose up -d
+    ```
+
+----
+
+NOTE: 
+If there is problem with owner/access rights for the files, try this:
 
     ```cmd
     cd /data_old
@@ -92,12 +101,6 @@ If CSC virtual machine (running docker) runs out of disc space this is what can 
 
     sudo find . ! -type l -exec chmod -v --reference='{}' /data/'{}' \;
     ```
-15. Restart docker (docker-compose up -d)
-
-    ```cmd
-    sudo docker compose up -d
-    ```
-
 
 
 
