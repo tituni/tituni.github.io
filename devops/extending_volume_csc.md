@@ -8,15 +8,11 @@ If CSC virtual machine using a volume runs out of disc space this is what can be
     sudo docker compose down
     ```
 
-2. Extend volume size in CSC 
+2. Extend volume size in CSC control panel
 
     ![extend volume](./img/extend_volume.png)
 
-3.  Restart VM
-
-    ```cmd
-    sudo reboot
-    ```
+3.  Restart VM from CSC control panel
 
 4. Now the disk size should be bigger
 
