@@ -9,3 +9,4 @@ These pages contain some instructions and tutorials to be used as support materi
 - [How to setup Java development environment](devops/javadev.md)
 - [Adding new volume to existing CSC virtual machine](devops/adding_new_volume_csc.md)
 - [Extending volume](devops/extending_volume_csc.md)
+- [Setup Latex in vscode](latex/install.md)
