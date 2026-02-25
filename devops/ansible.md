@@ -1,0 +1,190 @@
+## Ansible
+
+To read the book log in with Tuni-credentials: [Ansible: Up and Running, 3rd Edition](https://andor.tuni.fi/permalink/358FIN_TAMPO/1j3mh4m/alma9911780795505973).
+
+### Installation
+
+For learning ansible, open a new devcontainer (Ubuntu) in vscode. Python3 is installed as a default.
+
+```cmd
+    python3 --version
+```
+
+Install pip3, venv and Ansible:
+
+```cmd
+    sudo apt install python3-pip
+    sudo apt install python3.12-venv
+    python3 -m venv .venv --prompt A
+    source .venv/bin/activate
+    pip3 install ansible
+```
+
+- [Ansible: Up and Running, 3rd Edition: 2. Installation and setup](https://learning.oreilly.com/library/view/ansible-up-and/9781098109141/ch02.html#ansible_development)
+
+### Connecting to a server 
+
+Configure inventory/csc.ini file and test ssh-connection to your server:
+
+```cmd
+    unset DISPLAY
+    ssh-keyscan -H your_host >> ~/.ssh/known_hosts
+    ansible devops_runner_testing -i inventory/csc.ini -m ping
+```
+
+NOTE:
+- set the file permissions for .ssh - folder and *.pem - file
+    ```cmd
+        chmod 700 .ssh
+        chmod 600 ~/.ssh/yourkey.pem
+    ```
+
+- path to .ssh - folder needs to be absolute 
+    ```cmd
+        find / -name "yourkey.pem" 2>/dev/null
+    ```
+
+### Setup config
+
+Place ansible.cfg file in the root of your project.
+
+    ```cmd
+        [defaults]
+        inventory = inventory/csc.ini
+        host_key_checking = False
+        stdout_callback = default
+        callback_result_format = yaml
+        callback_enabled = timer
+    ```
+
+### Running ansible commands
+
+Put longer commands in parenthesis:
+
+    ```cmd
+        ansible devops_runner_testing -a "tail /var/log/dmesg"
+    ```
+
+Get inventory:
+
+    ```cmd
+        ansible-inventory --graph
+    ```
+
+Install nginx (-b for root):
+
+    ```cmd
+        ansible devops_runner_testing -b -m package -a name=nginx
+    ```
+
+### Playbooks
+
+Test playbooks by installing a webserver with one page,
+
+In files/ create file "nginx.conf"
+
+    ```cmd
+    server {
+        listen 80 default_server;
+        listen [::]:80 default_server ipv6only=on;
+
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+
+        server_name localhost;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+    }
+    ```
+
+In templates/ create "index.html.j2"
+
+    ```cmd
+        <html>
+            <head>
+                <title>Welcome to ansible</title>
+            </head>
+            <body>
+                <h1>Nginx, configured by Ansible</h1>
+                <p>If you can see this, Ansible successfully installed nginx.</p>
+
+                <p>Running on {{ inventory_hostname }}</p>
+            </body>
+        </html>
+    ```
+
+Create playbook-file "webservers.yml"
+
+    ```cmd
+      ---
+      - name: Configure webserver with nginx
+        hosts: webservers
+        become: true
+        tasks:
+            - name: Ensure nginx is installed
+            package:
+                name: nginx
+                update_cache: true
+
+            - name: Copy nginx config file
+            copy:
+                src: nginx.conf
+                dest: /etc/nginx/sites-available/default
+
+            - name: Enable configuration
+            file:
+                src: /etc/nginx/sites-available/default
+                dest: /etc/nginx/sites-enabled/default
+                state: link
+
+            - name: Copy home page template
+            template:
+                src: index.html.j2
+                dest: /usr/share/nginx/html/index.html
+
+            - name: Restart nginx
+            service:
+                name: nginx
+                state: restarted
+      ...
+        ```
+
+Run your playbook:
+
+    ```cmd
+        ansible-playbook webservers.yml
+    ```
+
+This should be visible in you IP-address:
+
+    ![ansible playbook1](./img/ansible_playbook1.png)
+
+- [Ansible: Up and Running, 3rd Edition: 2. Playbooks](https://learning.oreilly.com/library/view/ansible-up-and/9781098109141/ch03.html#specifying_an_nginx_config_file)
+
+### Certificate for nginx using Let's encrypt
+
+Create new playbook "certbot.yml".
+
+    ```cmd
+        ---
+        - name: Setup Nginx SSL with Let's Encrypt
+        hosts: webservers
+        become: true
+        vars:
+            email: "your@email.com"
+            domain: "your.domain.com"
+        tasks:
+            - name: Install Certbot and Nginx plugin
+            apt:
+                name: [certbot, python3-certbot-nginx]
+                state: present
+            - name: Run Certbot for Nginx
+            command: "certbot --nginx -d {{ domain }} --email {{ email }} --agree-tos -n"
+        ...
+    ```
+
+
+
+

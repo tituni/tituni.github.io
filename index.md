@@ -10,3 +10,4 @@ These pages contain some instructions and tutorials to be used as support materi
 - [Adding new volume to existing CSC virtual machine](devops/adding_new_volume_csc.md)
 - [Extending volume](devops/extending_volume_csc.md)
 - [Setup Latex in vscode](latex/install.md)
+- [Ansible tutorial](devops/ansible.md)
