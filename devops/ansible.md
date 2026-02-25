@@ -185,6 +185,75 @@ Create new playbook "certbot.yml".
         ...
     ```
 
+### Install Docker and docker-compose
+
+    ```cmd
+      ---
+      - name: Install Docker on Ubuntu using official Docker repo
+        hosts: all
+        become: true
+
+        tasks:
+            - name: Update apt cache
+            ansible.builtin.apt:
+                update_cache: yes
+
+            - name: Ensure dependencies are installed
+            ansible.builtin.package:
+                name:
+                - bc
+                - curl
+                - expect
+                - git
+                - ca-certificates
+                state: present
+
+            - name: Create Docker GPG key directory
+            ansible.builtin.file:
+                path: /etc/apt/keyrings
+                state: directory
+                mode: "0755"
+
+            - name: Download Docker's official GPG key
+            ansible.builtin.get_url:
+                url: https://download.docker.com/linux/ubuntu/gpg
+                dest: /etc/apt/keyrings/docker.asc
+                mode: "0644"
+
+            - name: Add Docker repository to Apt sources
+            ansible.builtin.apt_repository:
+                repo: "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu  {{ ansible_facts['distribution_release'] }} stable"
+                state: present
+                filename: docker
+
+            - name: Update apt cache after adding Docker repository
+            ansible.builtin.apt:
+                update_cache: yes
+
+            - name: Install Docker and Docker Compose
+            ansible.builtin.package:
+                name:
+                - docker-ce
+                - docker-ce-cli
+                - containerd.io
+                - docker-buildx-plugin
+                - docker-compose-plugin
+                state: present
+
+            - name: Ensure Docker service is enabled and started
+            ansible.builtin.service:
+                name: docker
+                state: started
+                enabled: yes
+
+            - name: Add ubuntu user to docker group
+            ansible.builtin.user:
+                name: ubuntu
+                groups: docker
+                append: yes
+    ``` 
+
+    - [Install Docker with Ansible on Ubuntu (Official Repo + Docker Compose)](https://dev.to/lovestaco/install-docker-with-ansible-on-ubuntu-official-repo-docker-compose-578b)
 
 
 
