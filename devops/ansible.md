@@ -159,7 +159,7 @@ Run your playbook:
 
 This should be visible in you IP-address:
 
-    ![ansible playbook1](./img/ansible_playbook1.png)
+![ansible playbook1](./img/ansible_playbook1.png)
 
 - [Ansible: Up and Running, 3rd Edition: 2. Playbooks](https://learning.oreilly.com/library/view/ansible-up-and/9781098109141/ch03.html#specifying_an_nginx_config_file)
 
