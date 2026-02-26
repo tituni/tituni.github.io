@@ -253,7 +253,7 @@ Create new playbook "certbot.yml".
             append: yes
 ``` 
 
-    - [Install Docker with Ansible on Ubuntu (Official Repo + Docker Compose)](https://dev.to/lovestaco/install-docker-with-ansible-on-ubuntu-official-repo-docker-compose-578b)
+- [Install Docker with Ansible on Ubuntu (Official Repo + Docker Compose)](https://dev.to/lovestaco/install-docker-with-ansible-on-ubuntu-official-repo-docker-compose-578b)
 
 ### Install gitlab runner using roles 
 
@@ -294,8 +294,8 @@ Install role and run playbook:
     ansible-playbook gitlab_runner.yml
 ```
 
-    - [https://github.com/riemers/ansible-gitlab-runner](https://github.com/riemers/ansible-gitlab-runner)
-    - [Ansible Roles: Basics, Creating & Using](https://spacelift.io/blog/ansible-roles)
+- [https://github.com/riemers/ansible-gitlab-runner](https://github.com/riemers/ansible-gitlab-runner)
+- [Ansible Roles: Basics, Creating & Using](https://spacelift.io/blog/ansible-roles)
 
 
 
