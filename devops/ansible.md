@@ -255,6 +255,46 @@ Create new playbook "certbot.yml".
 
     - [Install Docker with Ansible on Ubuntu (Official Repo + Docker Compose)](https://dev.to/lovestaco/install-docker-with-ansible-on-ubuntu-official-repo-docker-compose-578b)
 
+### Install gitlab runner using roles 
+
+Create playbook "gitlab_runner.yml"
+
+```cmd
+  - hosts: all
+    become: true
+    vars_files:
+        - vars/main.yml
+    roles:
+        - { role: riemers.gitlab-runner }
+```    
+
+Create vars/mail.yml
+
+```cmd
+    gitlab_runner_coordinator_url: https://your-gitlab-url/
+    gitlab_runner_registration_token: 'your_token_from_gitlab'
+    gitlab_runner_runners:
+  - name: 'Example Docker GitLab Runner'
+    executor: docker
+    docker_image: 'alpine'
+    docker_volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/cache"
+    extra_configs:
+      runners.docker:
+        memory: 512m
+      runners.docker.sysctls:
+        net.ipv4.ip_forward: "1"
+```
+
+Install role and run playbook:
+
+```cmd
+    ansible-galaxy install riemers.gitlab-runner
+    ansible-playbook gitlab_runner.yml
+```
+
+    - [https://github.com/riemers/ansible-gitlab-runner](https://github.com/riemers/ansible-gitlab-runner)
     - [Ansible Roles: Basics, Creating & Using](https://spacelift.io/blog/ansible-roles)
 
 
