@@ -298,4 +298,13 @@ Install role and run playbook:
 - [Ansible Roles: Basics, Creating & Using](https://spacelift.io/blog/ansible-roles)
 
 
+### Ansible in ci/cd pipeline
 
+- [Using Ansible in CI/CD Workflows: Guide & Examples](https://spacelift.io/blog/ansible-ci-cd)
+- [How to pass password to Ansible from environment variable](https://medium.com/opsops/how-to-pass-password-to-ansible-from-environment-variable-bd5c566bc8a1)
+- [How to Use Ansible to Run Docker Compose](https://oneuptime.com/blog/post/2026-02-21-how-to-use-ansible-to-run-docker-compose/view)
+- [How to Use Ansible to Configure Reverse Proxy with Nginx](https://oneuptime.com/blog/post/2026-02-21-ansible-configure-reverse-proxy-nginx/view)
+
+During the Ansible testing, it might be a good idea to comment out the build and test - job (to make pipeline faster):
+
+- [How to Temporarily Disable or Skip a GitLab CI Pipeline Job: Better Methods Than Commenting Out](https://www.tutorialpedia.org/blog/is-there-a-better-way-to-disable-skip-a-job-in-a-gitlab-ci-pipeline-than-commenting-everything-out/)
