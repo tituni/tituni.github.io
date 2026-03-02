@@ -11,3 +11,4 @@ These pages contain some instructions and tutorials to be used as support materi
 - [Extending volume](devops/extending_volume_csc.md)
 - [Setup Latex in vscode](latex/install.md)
 - [Ansible tutorial](devops/ansible.md)
+- [Connecting codegrade to course-gitlab](./codegrade/connection_gitlab.md)
