@@ -75,14 +75,34 @@ Here are some additional information for further configuration:
 
     Since we are running this pipeline locally, we cannot access the CI/CD variables in gitlab we shall put them in config-files.
 
-A) Using one file for all repos
+    A) Using one file for all repos
 
- Create a file "variables.yml" inside of $HOME/.gitlab-ci-local - folder (NOTE: this is outside of your repo).  See example below.
+    Create a file "variables.yml" inside of $HOME/.gitlab-ci-local - folder (NOTE: this is outside of your repo).  See example below.
 
-    ```cmd
-    project:
-    gitlab_url/your_repo.git:
-        # Will be type Variable and only available if remote is exact match
+        ```cmd
+        project:
+        gitlab_url/your_repo.git:
+            # Will be type Variable and only available if remote is exact match
+            CI_PROJECT_PATH: your_repo_path
+            CI_PROJECT_DIR: .devcontainer/your_project_folder #depends on your setup
+            REGISTRY_URL: image_registry_url
+            REGISTRY_TOKEN: your_token
+            REGISTRY_USER: your_username
+            STAGING_HOST: your_host_ip
+            MY_SSH_KEY: your_ssh_key
+            DB_PASSWORD: your_db_password
+
+        group:
+            
+        global:
+            
+        ```
+
+    B) Using project specific file inside your repo
+
+        Create ".gitlab-ci-local-variables.yml" - file in the root of your repo, and add it to your .gitignore. See example below.
+
+        ```cmd
         CI_PROJECT_PATH: your_repo_path
         CI_PROJECT_DIR: .devcontainer/your_project_folder #depends on your setup
         REGISTRY_URL: image_registry_url
@@ -91,25 +111,5 @@ A) Using one file for all repos
         STAGING_HOST: your_host_ip
         MY_SSH_KEY: your_ssh_key
         DB_PASSWORD: your_db_password
-
-    group:
-        
-    global:
-        
-    ```
-
-B) Using project specific file inside your repo
-
-    Create ".gitlab-ci-local-variables.yml" - file in the root of your repo, and add it to your .gitignore. See example below.
-
-    ```cmd
-    CI_PROJECT_PATH: your_repo_path
-    CI_PROJECT_DIR: .devcontainer/your_project_folder #depends on your setup
-    REGISTRY_URL: image_registry_url
-    REGISTRY_TOKEN: your_token
-    REGISTRY_USER: your_username
-    STAGING_HOST: your_host_ip
-    MY_SSH_KEY: your_ssh_key
-    DB_PASSWORD: your_db_password
-    ```
+        ```
 
