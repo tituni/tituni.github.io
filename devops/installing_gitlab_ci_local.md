@@ -2,7 +2,13 @@
 
 For fast testing install gitlab-ci-local for running jobs from the pipeline locally.
 
-1. Use Ubuntu (can be installed in Windows) or use devcontainer (docker-in-docker) in VSCode
+1. Use Ubuntu (or use WSL-2 in Windows) 
+
+    - If you are using WSL-2, you need to enable Docker in WSL. Follow the instruction in this: [Docker Desktop WSL 2 backend on Windows](https://docs.docker.com/desktop/features/wsl/#turn-on-docker-desktop-wsl-2)
+    - Check that your Docker desktop has these settings:
+
+    ![wsl general](./img/docker_wsl2_general.png)
+    ![wsl resources](./img/docker_wsl2_resources.png)
 
 2. Install nvm (Node VersionManager)
 
@@ -66,7 +72,7 @@ alpine-image:
 Run in the same folder as your .gitlab-ci.yml
 
 ```cmd
-gitlab-ci-local --cwd .
+gitlab-ci-local --cwd . --privileged
 ```
 
 Here are some additional information for further configuration:
