@@ -2,6 +2,10 @@
 
 These pages contain some instructions and tutorials to be used as support material in various courses. Also, it serves a notebook for myself.
 
+### Gitlab
+
+- [How to add SSH-key to gitlab](devops/adding_ssh_key.md)
+
 ### DevOps
 
 - [How to install a GitLab runner](devops/gitlabrunners.md)
