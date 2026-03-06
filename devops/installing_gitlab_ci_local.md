@@ -4,11 +4,47 @@ For fast testing install gitlab-ci-local for running jobs from the pipeline loca
 
 1. Use Ubuntu (or use WSL-2 in Windows) 
 
-    - If you are using WSL-2, you need to enable Docker in WSL. Follow the instruction in this: [Docker Desktop WSL 2 backend on Windows](https://docs.docker.com/desktop/features/wsl/#turn-on-docker-desktop-wsl-2)
-    - Check that your Docker desktop has these settings:
+    - If you are using WSL-2 and Podman, you need to enable Podman in WSL. 
+        - [Running Podman on Windows with WSL: A practical quide](https://dev.to/octasoft-ltd/running-podman-on-windows-with-wsl-a-practical-guide-4jl8)
+        - [Accessing Podman from another WSL distribution](https://podman-desktop.io/docs/podman/accessing-podman-from-another-wsl-instance)
+        - Since gitlab-ci-local uses docker, you need to install [this](https://oneuptime.com/blog/post/2026-01-26-podman-docker-alternative/view):
+        ```cmd
+            sudo apt install podman-docker
+            nano ~/.config/containers/containers.conf  #remove lines with configmap and farms
+            sudo touch /etc/containers/nodocker
+            docker --version   # should give podman
+        ```
+        
+        Lisää vielä systemd:n käynnisty (ellei ole jo):
+        
+        ```cmd
+        sudo nano /etc/wsl.conf
+        ```
+        Lisää rivit:
+        
+        ```cmd
+            [boot]
+            systemd=true
+        ```
+        
+        Aktivoi käyttäjän taustaprosessit (ellei ole jo):
+        
+        ```cmd
+        sudo loginctl enable-linger $USER
+        ```
+        
+        Määritä XDG-polku (ellei ole jo):
+        
+        ```cmd
+        export XDG_RUNTIME_DIR=/run/user/$(id -u)
+        ```
+    
+    - If you are using WSL-2 and Docker, you need to enable Docker in WSL. 
+        - [Docker Desktop WSL 2 backend on Windows](https://docs.docker.com/desktop/features/wsl/#turn-on-docker-desktop-wsl-2)
+        - Check that your Docker desktop has these settings:
 
-    ![wsl general](./img/docker_wsl2_general.png)
-    ![wsl resources](./img/docker_wsl2_resources.png)
+        ![wsl general](./img/docker_wsl2_general.png)
+        ![wsl resources](./img/docker_wsl2_resources.png)
 
 2. Install nvm (Node VersionManager)
 

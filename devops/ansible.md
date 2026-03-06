@@ -4,7 +4,7 @@ To read the book log in with Tuni-credentials: [Ansible: Up and Running, 3rd Edi
 
 ### Installation
 
-For learning ansible, open a new devcontainer (Ubuntu) in vscode. Python3 is installed as a default.
+For learning ansible, open a new devcontainer (Ubuntu) in VSCode or use WSL (Ubuntu). Python3 is installed as a default in Ubuntu. You can also use some other Linux/Ubuntu environment.
 
 ```cmd
     python3 --version
@@ -18,6 +18,26 @@ Install pip3, venv and Ansible:
     python3 -m venv .venv --prompt A
     source .venv/bin/activate
     pip3 install ansible
+```
+
+OR install just Ansible:
+
+```cmd
+    sudo apt install python3-pip
+    pip3 install ansible
+```
+
+You might need to put Ansible to path (if installation warns about it):
+
+```cmd
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+    source ~/.bashrc
+```
+
+Test Ansible installation:
+
+```cmd
+    ansible --version
 ```
 
 - [Ansible: Up and Running, 3rd Edition: 2. Installation and setup](https://learning.oreilly.com/library/view/ansible-up-and/9781098109141/ch02.html#ansible_development)
