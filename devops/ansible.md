@@ -13,6 +13,7 @@ For learning ansible, open a new devcontainer (Ubuntu) in VSCode or use WSL (Ubu
 Install pip3, venv and Ansible:
 
 ```cmd
+    sudo apt update
     sudo apt install python3-pip
     sudo apt install python3.12-venv
     python3 -m venv .venv --prompt A

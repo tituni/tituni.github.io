@@ -5,7 +5,7 @@ These instructions are for Ubuntu
 1. Create a new private key
 
 ```cmd
-ssh-keygen -t ed25519 -C "your.email@address.fi"
+ssh-keygen -t ed25519 -C "your.email@address.com"
 ```
 
 2. Add key to your ssh-agent
@@ -32,4 +32,12 @@ Go to the location of you keys:
 
 Copy the public key (starts with ssh-ed25519) and store it in gitlab (User settings -> SSH Keys -> Add new key)
  
+4. Test connection
+
+```cmd
+ssh -T git@your_gitlab_instance.com
+```
+
+
+
 
